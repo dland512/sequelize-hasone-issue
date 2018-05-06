@@ -11,7 +11,7 @@ function main() {
         dialect: 'postgres',
         host: '127.0.0.1',
         port: 5432,
-        database: 'testdb',
+        database: 'testdb6',
         username: 'postgres',
         password: null,
         define: {
@@ -64,15 +64,6 @@ function setupModels(sequelize) {
         otherId: {
             type: Sequelize.STRING,
             field: 'other_id',
-        },
-
-        teamId: {
-            type: Sequelize.INTEGER,
-            field: 'team_id',
-            references: {
-                model: 'team',
-                key: 'id'
-            }
         },
 
         firstName: {

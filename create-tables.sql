@@ -7,15 +7,10 @@ CREATE TABLE public.player
     id integer NOT NULL,
     first_name character varying(50) COLLATE pg_catalog."default",
     last_name character varying(50) COLLATE pg_catalog."default",
-    team_id integer,
     "createdAt" date,
     "updatedAt" date,
     other_id character varying COLLATE pg_catalog."default",
-    CONSTRAINT player_pkey PRIMARY KEY (id),
-    CONSTRAINT fk_team_id FOREIGN KEY (team_id)
-        REFERENCES public.team (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+    CONSTRAINT player_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
@@ -24,10 +19,6 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.player
     OWNER to postgres;
-
-COMMENT ON CONSTRAINT fk_team_id ON public.player
-    IS 'asdf';
-
 
 
 -- Table: public.player_ext
@@ -56,3 +47,24 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.player_ext
     OWNER to postgres;
+
+
+INSERT INTO public.player(
+	id, first_name, last_name, "createdAt", "updatedAt", other_id)
+	VALUES (1, 'Lance', 'Uppercut', null, null, 'abc');
+
+
+INSERT INTO public.player(
+	id, first_name, last_name, "createdAt", "updatedAt", other_id)
+	VALUES (2, 'Rock', 'Strongo', null, null, 'def');
+
+
+INSERT INTO public.player_ext(
+	id, player_id, age, eye_color, "createdAt", "updatedAt", player_other_id)
+	VALUES (1, 1, 25, 'blue', null, null, 'abc');
+
+INSERT INTO public.player_ext(
+	id, player_id, age, eye_color, "createdAt", "updatedAt", player_other_id)
+	VALUES (2, 2, 27, 'green', null, null, 'def');
+
+
